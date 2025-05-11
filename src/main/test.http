@@ -1,0 +1,36 @@
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzQ2OTM0OTkyLCJpYXQiOjE3NDY5MzEzOTJ9.q531rZPahEW0IzRkqNkoNhsSqffXWNuJqMm6Rw3Q34Y
+
+
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### 회원가입
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "asdf",
+  "userRole": "USER"
+}
+
+### 로그인
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "asdf"
+}
+
+### todo 생성
+POST http://localhost:8080/todos
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+  "title": "title",
+  "contents": "content"
+}
+
