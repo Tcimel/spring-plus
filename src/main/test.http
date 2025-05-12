@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoidGVzdDFAZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IlVTRVIiLCJleHAiOjE3NDcwMzI4NDcsImlhdCI6MTc0NzAyOTI0N30.J4jrIkBSSpyIyMzc501Zp2n0i0W4_XxKormY76QCtOo
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImVtYWlsIjoidGVzdDJAZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IkFETUlOIiwiZXhwIjoxNzQ3MDM4NzMxLCJpYXQiOjE3NDcwMzUxMzF9.2AH3HqW4U7Y3HR3tnbDwDvINFFWcxZANrAqU8CtJ6yY
 
 
 ### GET request to example server
@@ -10,9 +10,9 @@ POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test1@example.com",
+  "email": "test2@example.com",
   "password": "asdf",
-  "userRole": "USER",
+  "userRole": "ADMIN",
   "nickName": "nickname"
 }
 
@@ -21,7 +21,7 @@ POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
-  "email": "test1@example.com",
+  "email": "test2@example.com",
   "password": "asdf"
 }
 
@@ -37,22 +37,28 @@ Content-Type: application/json
 
 ### todos 조회, 조건 없음
 GET http://localhost:8080/todos?page=1&size=10
+Authorization: {{bearerToken}}
 
 ### todos 조회, 날씨 조건
 GET http://localhost:8080/todos?page=1&size=10&weather=Rainy
+Authorization: {{bearerToken}}
 
 ### todos 조회, 날짜 조회
 GET http://localhost:8080/todos?page=1&size=10&start=2025-05-11
+Authorization: {{bearerToken}}
 
 ### todos 조회, 날씨 + 날짜
 GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&start=2025-05-11&end=2025-05-12
+Authorization: {{bearerToken}}
 
 ### todo 단건 조회
 GET http://localhost:8080/todos/202
+Authorization: {{bearerToken}}
 
 ### 유저 권한 변경
 PATCH http://localhost:8080/admin/users/11
 Content-Type: application/json
+Authorization: {{bearerToken}}
 
 {
   "role": "ADMIN"
