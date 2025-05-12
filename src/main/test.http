@@ -49,3 +49,11 @@ GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&start=2025-05-11&en
 
 ### todo 단건 조회
 GET http://localhost:8080/todos/202
+
+### 유저 권한 변경
+PATCH http://localhost:8080/admin/users/11
+Content-Type: application/json
+
+{
+  "role": "ADMIN"
+}
