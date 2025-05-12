@@ -1,13 +1,16 @@
 package org.example.expert.domain.todo.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.expert.domain.comment.entity.Comment;
 import org.example.expert.domain.common.entity.Timestamped;
 import org.example.expert.domain.manager.entity.Manager;
 import org.example.expert.domain.user.entity.User;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,5 +42,15 @@ public class Todo extends Timestamped {
         this.weather = weather;
         this.user = user;
         this.managers.add(new Manager(user, this));
+    }
+
+    public Todo(String  title, String contents, String weather, User user, LocalDateTime createdAt, LocalDateTime modifiedAt){
+        this.title = title;
+        this.contents = contents;
+        this.weather = weather;
+        this.user = user;
+        this.managers.add(new Manager(user, this));
+        this.setCreatedAt(createdAt);
+        this.setModifiedAt(modifiedAt);
     }
 }

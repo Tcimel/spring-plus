@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlclJvbGUiOiJVU0VSIiwiZXhwIjoxNzQ2OTM0OTkyLCJpYXQiOjE3NDY5MzEzOTJ9.q531rZPahEW0IzRkqNkoNhsSqffXWNuJqMm6Rw3Q34Y
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoidGVzdDFAZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IlVTRVIiLCJleHAiOjE3NDcwMTUxODcsImlhdCI6MTc0NzAxMTU4N30.uo_5kTdKgHVXpfcgNkrmzcm8wMwhYnVymdPQr_CxYJ8
 
 
 ### GET request to example server
@@ -10,9 +10,10 @@ POST http://localhost:8080/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
+  "email": "test1@example.com",
   "password": "asdf",
-  "userRole": "USER"
+  "userRole": "USER",
+  "nickName": "nickname"
 }
 
 ### 로그인
@@ -20,7 +21,7 @@ POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
+  "email": "test1@example.com",
   "password": "asdf"
 }
 
@@ -34,3 +35,14 @@ Content-Type: application/json
   "contents": "content"
 }
 
+### todos 조회, 조건 없음
+GET http://localhost:8080/todos?page=1&size=10
+
+### todos 조회, 날씨 조건
+GET http://localhost:8080/todos?page=1&size=10&weather=Sunny
+
+### todos 조회, 날짜 조회
+GET http://localhost:8080/todos?page=1&size=10&dateStart=2025-05-11
+
+### todos 조회, 날씨 + 날짜
+GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&dateStart=2025-05-11

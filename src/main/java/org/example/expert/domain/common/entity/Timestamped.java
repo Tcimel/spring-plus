@@ -22,4 +22,13 @@ public abstract class Timestamped {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime modifiedAt;
+
+    // 더미 생성용 setter
+    public void setCreatedAt(LocalDateTime createdAt){
+        this.createdAt = createdAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt){
+        this.modifiedAt = modifiedAt;
+    }
 }
