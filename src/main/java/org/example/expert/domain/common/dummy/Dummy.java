@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import org.example.expert.config.PasswordEncoder;
+import org.example.expert.domain.comment.entity.Comment;
+import org.example.expert.domain.comment.repository.CommentRepository;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.TodoRepository;
@@ -17,28 +20,36 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Profile("local")
+@Transactional
 public class Dummy implements ApplicationRunner {
 
 	private final UserRepository userRepository;
 	private final TodoRepository todoRepository;
+	private final CommentRepository commentRepository;
+	private final PasswordEncoder passwordEncoder;
 	private final Random random = new Random();
 	private final String[] weathers = {"Sunny","Rainy","Cloudy","Snowy","Windy"};
 
-	public Dummy(UserRepository userRepository, TodoRepository todoRepository){
+	public Dummy(UserRepository userRepository, TodoRepository todoRepository, CommentRepository commentRepository, PasswordEncoder passwordEncoder){
 		this.userRepository = userRepository;
 		this.todoRepository = todoRepository;
+		this.commentRepository = commentRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+
+		String encodedPassword = passwordEncoder.encode("test1234");
 		//User 100명 생성
 		IntStream.rangeClosed(1, 10).forEach(i->{
 			User user = new User(
 				"user"+i+"@example.com",
-				"test1234",
+				encodedPassword,
 				UserRole.USER,
 				"User"+i
 			);
@@ -64,6 +75,17 @@ public class Dummy implements ApplicationRunner {
 				LocalDateTime randomModifiedAt = randomDate.plusHours(random.nextInt(24));
 
 				todoRepository.updateTimestamps(savedTodo.getId(), randomDate, randomModifiedAt);
+
+				int commentCount = 3 + random.nextInt(3);
+				IntStream.rangeClosed(1, commentCount).forEach(k -> {
+					User randomUser = userRepository.findById((long)1+random.nextInt(10)).orElse(user);
+					Comment comment = new Comment(
+						"Comment " + k + "for Todo " + j,
+						randomUser,
+						savedTodo
+					);
+					commentRepository.save(comment);
+				});
 
 			});
 		});

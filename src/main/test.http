@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImVtYWlsIjoidGVzdDJAZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IkFETUlOIiwiZXhwIjoxNzQ3MDM4NzMxLCJpYXQiOjE3NDcwMzUxMzF9.2AH3HqW4U7Y3HR3tnbDwDvINFFWcxZANrAqU8CtJ6yY
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsImV4cCI6MTc0NzA0MTMyNSwiaWF0IjoxNzQ3MDM3NzI1fQ.o1Xuv7GtBToXf6wz2X9_DyjlZFjB7oikDeghx3Pi5Ag
 
 
 ### GET request to example server
@@ -21,8 +21,8 @@ POST http://localhost:8080/auth/signin
 Content-Type: application/json
 
 {
-  "email": "test2@example.com",
-  "password": "asdf"
+  "email": "user1@example.com",
+  "password": "test1234"
 }
 
 ### todo 생성
@@ -63,3 +63,7 @@ Authorization: {{bearerToken}}
 {
   "role": "ADMIN"
 }
+
+### 코멘트 조회
+GET http://localhost:8080/todos/102/comments
+Authorization: {{bearerToken}}
