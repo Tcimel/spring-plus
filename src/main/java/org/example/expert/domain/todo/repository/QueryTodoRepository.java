@@ -1,6 +1,7 @@
 package org.example.expert.domain.todo.repository;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.example.expert.domain.todo.entity.Todo;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,6 @@ public interface QueryTodoRepository {
 		String end,
 		Pageable pageable
 	);
+
+	Optional<Todo> findByIdWithUser(long todoId);
 }

@@ -1,18 +1,22 @@
 package org.example.expert.domain.todo.repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.example.expert.domain.todo.entity.QTodo;
 import org.example.expert.domain.todo.entity.Todo;
-import org.springframework.cglib.core.Local;
+import org.example.expert.domain.user.entity.QUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
+
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -80,5 +84,20 @@ public class QueryTodoRepositoryImpl implements QueryTodoRepository {
 		// todos : 현재 페이지 데이터(pageable로 제한된 목록)
 		// total : 전체 데이터 개수
 		return new PageImpl<>(todos, pageable, total);
+	}
+
+	@Override
+	public Optional<Todo> findByIdWithUser(long todoId) {
+		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+		QTodo todo = QTodo.todo;
+		QUser user = QUser.user;
+
+		Todo result = queryFactory
+			.selectFrom(todo)
+			.leftJoin(todo.user, user).fetchJoin()
+			.where(todo.id.eq(todoId))
+			.fetchOne(); // 단건 조회
+
+		return Optional.ofNullable(result);
 	}
 }

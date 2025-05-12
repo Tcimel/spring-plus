@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsImV4cCI6MTc0NzA0MTMyNSwiaWF0IjoxNzQ3MDM3NzI1fQ.o1Xuv7GtBToXf6wz2X9_DyjlZFjB7oikDeghx3Pi5Ag
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsImV4cCI6MTc0NzA1MDQ2MSwiaWF0IjoxNzQ3MDQ2ODYxfQ.qNJJ4is230dyFj3bNsnD22V5vZvWg53ux-hxB2Z2BlE
 
 
 ### GET request to example server
@@ -52,7 +52,7 @@ GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&start=2025-05-11&en
 Authorization: {{bearerToken}}
 
 ### todo 단건 조회
-GET http://localhost:8080/todos/202
+GET http://localhost:8080/todos/59
 Authorization: {{bearerToken}}
 
 ### 유저 권한 변경
