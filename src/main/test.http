@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoidGVzdDFAZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IlVTRVIiLCJleHAiOjE3NDcwMTUxODcsImlhdCI6MTc0NzAxMTU4N30.uo_5kTdKgHVXpfcgNkrmzcm8wMwhYnVymdPQr_CxYJ8
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImVtYWlsIjoidGVzdDFAZXhhbXBsZS5jb20iLCJ1c2VyUm9sZSI6IlVTRVIiLCJleHAiOjE3NDcwMzI4NDcsImlhdCI6MTc0NzAyOTI0N30.J4jrIkBSSpyIyMzc501Zp2n0i0W4_XxKormY76QCtOo
 
 
 ### GET request to example server
@@ -39,10 +39,13 @@ Content-Type: application/json
 GET http://localhost:8080/todos?page=1&size=10
 
 ### todos 조회, 날씨 조건
-GET http://localhost:8080/todos?page=1&size=10&weather=Sunny
+GET http://localhost:8080/todos?page=1&size=10&weather=Rainy
 
 ### todos 조회, 날짜 조회
-GET http://localhost:8080/todos?page=1&size=10&dateStart=2025-05-11
+GET http://localhost:8080/todos?page=1&size=10&start=2025-05-11
 
 ### todos 조회, 날씨 + 날짜
-GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&dateStart=2025-05-11
+GET http://localhost:8080/todos?page=1&size=10&weather=Sunny&start=2025-05-11&end=2025-05-12
+
+### todo 단건 조회
+GET http://localhost:8080/todos/202

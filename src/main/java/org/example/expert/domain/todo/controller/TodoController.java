@@ -29,13 +29,14 @@ public class TodoController {
 
     @GetMapping("/todos")
     public ResponseEntity<Page<TodoResponse>> getTodos(
-            @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(required = false) String weather,
-            @RequestParam(required = false) String dateStart,
-            @RequestParam(required = false) String dateEnd
+            @RequestParam(required = false) String start,
+            @RequestParam(required = false) String end
     ) {
-        return ResponseEntity.ok(todoService.getTodos(page, size, weather, dateStart, dateEnd));
+        System.out.println("==== /todos Controller 진입 ====");
+        return ResponseEntity.ok(todoService.getTodos(page, size, weather, start, end));
     }
 
     @GetMapping("/todos/{todoId}")

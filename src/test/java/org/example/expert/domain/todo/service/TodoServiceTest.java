@@ -37,7 +37,7 @@ class TodoServiceTest {
 	@Test
 	@DisplayName("Todo 저장 시 실패")
 	void saveTodo() {
-		AuthUser authUser = new AuthUser(1L, "test@example.com", UserRole.USER);
+		AuthUser authUser = new AuthUser(1L, "test@example.com", UserRole.USER, "user");
 		User user = User.fromAuthUser(authUser);
 		userRepository.save(user);
 

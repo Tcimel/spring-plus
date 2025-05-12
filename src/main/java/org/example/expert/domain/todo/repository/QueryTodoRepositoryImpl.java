@@ -1,6 +1,8 @@
 package org.example.expert.domain.todo.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,17 +41,17 @@ public class QueryTodoRepositoryImpl implements QueryTodoRepository {
 			jpql += " WHERE " + String.join(" AND ", conditions);
 		}
 
-		jpql += "ORDER BY t.modifiedAt DESC";
+		jpql += " ORDER BY t.modifiedAt DESC";
 		TypedQuery<Todo> query = entityManager.createQuery(jpql, Todo.class);
 
 		if(StringUtils.hasText(weather)){
 			query.setParameter("weather", weather);
 		}
 		if(StringUtils.hasText(start)){
-			query.setParameter("start", LocalDateTime.parse(start));
+			query.setParameter("start", LocalDate.parse(start).atStartOfDay());
 		}
 		if(StringUtils.hasText(end)){
-			query.setParameter("end", LocalDateTime.parse(end));
+			query.setParameter("end", LocalDate.parse(end).atTime(LocalTime.MAX));
 		}
 
 		query.setFirstResult((int)pageable.getOffset());
@@ -67,10 +69,10 @@ public class QueryTodoRepositoryImpl implements QueryTodoRepository {
 			countQuery.setParameter("weather", weather);
 		}
 		if(StringUtils.hasText(start)){
-			countQuery.setParameter("start", LocalDateTime.parse(start));
+			countQuery.setParameter("start", LocalDate.parse(start).atStartOfDay());
 		}
 		if(StringUtils.hasText(end)){
-			countQuery.setParameter("end", LocalDateTime.parse(end));
+			countQuery.setParameter("end", LocalDate.parse(end).atTime(LocalTime.MAX));
 		}
 
 		long total = countQuery.getSingleResult();
