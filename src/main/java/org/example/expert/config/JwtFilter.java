@@ -10,11 +10,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class JwtFilter implements Filter {
 
@@ -55,12 +63,31 @@ public class JwtFilter implements Filter {
                 return;
             }
 
-            UserRole userRole = UserRole.valueOf(claims.get("userRole", String.class));
+            /*UserRole userRole = UserRole.valueOf(claims.get("userRole", String.class));
 
             httpRequest.setAttribute("userId", Long.parseLong(claims.getSubject()));
             httpRequest.setAttribute("email", claims.get("email"));
             httpRequest.setAttribute("userRole", claims.get("userRole"));
-            httpRequest.setAttribute("nickName", claims.get("nickName"));
+            httpRequest.setAttribute("nickName", claims.get("nickName"));*/
+
+            String userRoleStr = claims.get("userRole",String.class);
+            UserRole userRole = UserRole.valueOf(userRoleStr);
+
+            AuthUser authUser = new AuthUser(
+                Long.parseLong(claims.getSubject()),
+				(String)claims.get("email"),
+                userRole,
+                (String)claims.get("nickName")
+            );
+
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + userRoleStr);
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                authUser, // principal
+                null, // credentials 패스워드 검증
+                List.of(authority) // 권한 목록
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(auth);
 
             if (url.startsWith("/admin")) {
                 // 관리자 권한이 없는 경우 403을 반환합니다.

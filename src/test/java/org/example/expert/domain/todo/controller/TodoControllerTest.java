@@ -1,48 +1,27 @@
 package org.example.expert.domain.todo.controller;
 
-import org.example.expert.config.AuthUserArgumentResolver;
-import org.example.expert.config.GlobalExceptionHandler;
-import org.example.expert.domain.common.annotation.Auth;
+
 import org.example.expert.domain.common.dto.AuthUser;
 import org.example.expert.domain.common.exception.InvalidRequestException;
-import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
-import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
-import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.service.TodoService;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.enums.UserRole;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
-import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.support.WebDataBinderFactory;
-import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(TodoController.class)
 // @ExtendWith(MockitoExtension.class)
