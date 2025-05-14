@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsImV4cCI6MTc0NzA1MzkyMywiaWF0IjoxNzQ3MDUwMzIzfQ.fqipPPbkzJAhhPf0IsCczVHVMfc1iKS777EsQqdQf8I
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsImV4cCI6MTc0NzIyNDMwMywiaWF0IjoxNzQ3MjIwNzAzfQ.rn8PxI8uQA8Vok0EXdwuhUAFCNyhOfACagKAuXM89X0
 
 
 ### GET request to example server
@@ -66,4 +66,20 @@ Authorization: {{bearerToken}}
 
 ### 코멘트 조회
 GET http://localhost:8080/todos/102/comments
+Authorization: {{bearerToken}}
+
+### todo 조건 조회
+GET http://localhost:8080/todos/search?page=1&size=10
+Authorization: {{bearerToken}}
+
+### todo 조건 조회
+GET http://localhost:8080/todos/search?page=1&size=10&range=3
+Authorization: {{bearerToken}}
+
+### todo 조건 조회
+GET http://localhost:8080/todos/search?page=1&size=10&range=3&title=User6
+Authorization: {{bearerToken}}
+
+### todo 조건 조회
+GET http://localhost:8080/todos/search?page=1&size=10&range=3&nickName=User9&title=User6
 Authorization: {{bearerToken}}

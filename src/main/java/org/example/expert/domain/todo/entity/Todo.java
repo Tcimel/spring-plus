@@ -8,6 +8,7 @@ import org.example.expert.domain.comment.entity.Comment;
 import org.example.expert.domain.common.entity.Timestamped;
 import org.example.expert.domain.manager.entity.Manager;
 import org.example.expert.domain.user.entity.User;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;

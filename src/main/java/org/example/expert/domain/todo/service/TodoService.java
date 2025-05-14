@@ -14,6 +14,7 @@ import org.example.expert.domain.manager.entity.Manager;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
+import org.example.expert.domain.todo.dto.response.TodoSearchResponse;
 import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.QueryTodoRepository;
 import org.example.expert.domain.todo.repository.TodoRepository;
@@ -100,5 +101,18 @@ public class TodoService {
 			todo.getCreatedAt(),
 			todo.getModifiedAt()
 		);
+	}
+
+	public Page<TodoSearchResponse> getTodosWithConditions(Integer page, Integer size, String title, String date, int range, String nickName) {
+		Pageable pageable = PageRequest.of(page - 1, size);
+
+		if(date == null){
+			date = LocalDate.now().toString();
+			System.out.println("오늘의 날짜가 잘 찍히는지 봅시다. 🚀🚀🚀🚀🚀🚀"+date);
+		}
+
+		Page<TodoSearchResponse> todos = queryTodoRepository.findByWithCondtions(title,date,range,nickName,pageable);
+
+		return todos;
 	}
 }
