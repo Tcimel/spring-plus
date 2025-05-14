@@ -1,4 +1,4 @@
-@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsImV4cCI6MTc0NzIyNDMwMywiaWF0IjoxNzQ3MjIwNzAzfQ.rn8PxI8uQA8Vok0EXdwuhUAFCNyhOfACagKAuXM89X0
+@bearerToken = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJ1c2VyMUBleGFtcGxlLmNvbSIsInVzZXJSb2xlIjoiVVNFUiIsIm5pY2tOYW1lIjoiVXNlcjEiLCJleHAiOjE3NDcyMzI5NjcsImlhdCI6MTc0NzIyOTM2N30.yK0iviAj0rXb2rFmUCRGhp6-QhvVLdxiDZ-MCVMUPL0
 
 
 ### GET request to example server
@@ -83,3 +83,12 @@ Authorization: {{bearerToken}}
 ### todo 조건 조회
 GET http://localhost:8080/todos/search?page=1&size=10&range=3&nickName=User9&title=User6
 Authorization: {{bearerToken}}
+
+### 매니저 저장 요청
+POST http://localhost:8080/todos/202/managers
+Authorization: {{bearerToken}}
+Content-Type: application/json
+
+{
+  "managerUserId": 2
+}

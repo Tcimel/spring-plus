@@ -28,11 +28,15 @@ public class ManagerService {
     private final ManagerRepository managerRepository;
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
+    private final ManagerLogService managerLogService;
 
     @Transactional
     public ManagerSaveResponse saveManager(AuthUser authUser, long todoId, ManagerSaveRequest managerSaveRequest) {
+        managerLogService.writeLog(managerSaveRequest.getManagerUserId(), "save request, managerId : " + managerSaveRequest.getManagerUserId()+" todoId : "+ todoId);
+
         // 일정을 만든 유저
-        User user = User.fromAuthUser(authUser);
+        // User user = User.fromAuthUser(authUser);
+        User user = userRepository.findById(authUser.getId()).orElseThrow(()-> new InvalidRequestException("존재하지 않는 유저입니다."));
         Todo todo = todoRepository.findById(todoId)
                 .orElseThrow(() -> new InvalidRequestException("Todo not found"));
 
@@ -49,6 +53,7 @@ public class ManagerService {
 
         Manager newManagerUser = new Manager(managerUser, todo);
         Manager savedManagerUser = managerRepository.save(newManagerUser);
+        managerLogService.writeLog(managerSaveRequest.getManagerUserId(), "save complete, managerId : " + managerSaveRequest.getManagerUserId()+" todoId : "+ todoId);
 
         return new ManagerSaveResponse(
                 savedManagerUser.getId(),

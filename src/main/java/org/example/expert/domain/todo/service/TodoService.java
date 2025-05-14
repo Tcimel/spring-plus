@@ -20,6 +20,7 @@ import org.example.expert.domain.todo.repository.QueryTodoRepository;
 import org.example.expert.domain.todo.repository.TodoRepository;
 import org.example.expert.domain.user.dto.response.UserResponse;
 import org.example.expert.domain.user.entity.User;
+import org.example.expert.domain.user.repository.UserRepository;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,9 +37,11 @@ public class TodoService {
 	private final TodoRepository todoRepository;
 	private final WeatherClient weatherClient;
     private final QueryTodoRepository queryTodoRepository;
+	private final UserRepository userRepository;
 
 	public TodoSaveResponse saveTodo(AuthUser authUser, TodoSaveRequest todoSaveRequest) {
-		User user = User.fromAuthUser(authUser);
+		// User user = User.fromAuthUser(authUser);
+		User user = userRepository.findById(authUser.getId()).orElseThrow(()-> new InvalidRequestException("존재하지 않는 유저입니다."));
 
 		String weather = weatherClient.getTodayWeather();
 
@@ -48,8 +51,10 @@ public class TodoService {
 			weather,
 			user
 		);
+
 		// Manager manager = new Manager(user, newTodo);
 		// newTodo.getManagers().add(manager);
+
 		Todo savedTodo = todoRepository.save(newTodo);
 
 		return new TodoSaveResponse(
