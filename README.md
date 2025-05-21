@@ -43,18 +43,6 @@ spring-plus/
 └── test/
 ```
 
-## 🧪 테스트
-
-- `@WebMvcTest` 기반의 컨트롤러 단위 테스트
-- `@MockBean`으로 Service/Resolver 목킹
-- 예외 상황과 정상 흐름에 대한 케이스 테스트
-
-## 🚧 진행 중인 학습
-
-- Spring Security 커스터마이징
-- JWT와 인터셉터 간의 상호 작용
-- 테스트에서 `HandlerMethodArgumentResolver` 목킹하기
-
 ## 📌 커밋 메시지 컨벤션
 
 - `feat`: 기능 추가
